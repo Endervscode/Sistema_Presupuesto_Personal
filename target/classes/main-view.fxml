@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Circle?>
+
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.chart.PieChart?>
+<BorderPane style="-fx-background-color: #0D1117;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.sistemapresupuestopersonal.MainController">
+
+    <!-- Contenido central: TabPane sin pestañas visibles -->
+    <center>
+        <TabPane fx:id="mainTabPane" tabClosingPolicy="UNAVAILABLE" side="TOP">
+            <!-- Ocultar pestañas superiores -->
+            <Tab text="Saldos" fx:id="tabSaldos">
+                <!-- Usamos StackPane para superponer botones sin desplazar el contenido -->
+                <StackPane>
+                    <VBox fx:id="saldosContent" alignment="CENTER" spacing="25" style="-fx-padding: 30;">
+                        <Label fx:id="welcomeText" text="Saldos" style="-fx-text-fill: white; -fx-font-size: 28px; -fx-font-weight: bold;"/>
+                        <Label text="Cuentas" style="-fx-text-fill: #8B949E; -fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+                        <ScrollPane fitToWidth="true" style="-fx-background: transparent; -fx-background-color: transparent;">
+                            <FlowPane fx:id="cuentasPane" hgap="20" vgap="20" alignment="CENTER" style="-fx-padding: 10;"/>
+                        </ScrollPane>
+                    </VBox>
+
+                    <!-- Botones de acción solo visibles en Saldos (esquina superior derecha) -->
+                    <HBox alignment="TOP_RIGHT" style="-fx-padding: 20 30 0 0;">
+                        <Button fx:id="btnAddTransaction" text="Nueva Transacción" onAction="#onAddTransaction" style="-fx-background-color: #0A3D62; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 8; -fx-padding: 10 20; -fx-effect: dropshadow(gaussian, rgba(0,180,216,0.4), 10, 0, 0, 4); -fx-cursor: hand;"/>
+                        <Button fx:id="btnAddAccount" text="Nueva Cuenta" onAction="#onAddAccount" style="-fx-background-color: #238636; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 8; -fx-padding: 10 20; -fx-effect: dropshadow(gaussian, rgba(46,204,113,0.4), 10, 0, 0, 4); -fx-cursor: hand;" layoutX="180"/>
+                    </HBox>
+                </StackPane>
+            </Tab>
+
+            <Tab text="Resumen" fx:id="tabResumen">
+                <VBox alignment="CENTER" spacing="30" style="-fx-padding: 30;">
+                    <HBox alignment="CENTER" spacing="20">
+                        <Button text="◀" onAction="#onPrevMesResumen" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 18px; -fx-cursor: hand;"/>
+                        <VBox alignment="CENTER">
+                            <Label text="Resumen" style="-fx-text-fill: #8B949E; -fx-font-size: 14px;"/>
+                            <Label fx:id="lblMesResumen" text="MES AÑO" style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold;"/>
+                        </VBox>
+                        <Button text="▶" onAction="#onNextMesResumen" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 18px; -fx-cursor: hand;"/>
+                    </HBox>
+
+                    <!-- Panel con los dos PieCharts grandes -->
+                    <HBox alignment="CENTER" spacing="80">
+                        <!-- PieChart Ingresos (verde base) -->
+                        <VBox alignment="CENTER" spacing="10">
+                            <Label text="INGRESOS" style="-fx-text-fill: #4CAF50; -fx-font-size: 18px; -fx-font-weight: bold;"/>
+                            <PieChart fx:id="pieIngresos" title="Fuentes de Ingreso" clockwise="true" labelsVisible="true" legendVisible="true" style="-fx-pref-width: 300; -fx-pref-height: 300;"/>
+                        </VBox>
+
+                        <!-- PieChart Gastos (rojo base) -->
+                        <VBox alignment="CENTER" spacing="10">
+                            <Label text="GASTOS" style="-fx-text-fill: #F44336; -fx-font-size: 18px; -fx-font-weight: bold;"/>
+                            <PieChart fx:id="pieGastos" title="Categorías de Gasto" clockwise="true" labelsVisible="true" legendVisible="true" style="-fx-pref-width: 300; -fx-pref-height: 300;"/>
+                        </VBox>
+                    </HBox>
+
+                    <!-- Balance del período -->
+                    <Label fx:id="lblBalancePeriodo" text="Balance del período: $0" style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+                    <Separator style="-fx-background-color: #333;" maxWidth="400"/>
+
+                    <Label text="Estado de Presupuestos" style="-fx-text-fill: #8B949E; -fx-font-size: 16px; -fx-font-weight: bold;"/>
+
+                    <ScrollPane fitToWidth="true" style="-fx-background: transparent; -fx-background-color: transparent;" prefHeight="200" maxWidth="200">
+                        <VBox fx:id="vboxPresupuestos" spacing="15" />
+                    </ScrollPane>
+                </VBox>
+            </Tab>
+
+            <Tab text="Movimientos" fx:id="tabMovimientos">
+                <VBox spacing="20" style="-fx-padding: 20;">
+                    <!-- Filtro por cuenta (opcional pero útil) -->
+                    <HBox spacing="15" alignment="CENTER_LEFT" style="-fx-background-color: #161B22; -fx-padding: 10; -fx-background-radius: 8;">
+                        <Label text="Filtrar:" style="-fx-text-fill: white; -fx-font-size: 14px;"/>
+                        <DatePicker fx:id="dpMovimientos" promptText="Fecha específica" prefWidth="150"/>
+                        <ComboBox fx:id="cbFiltroCuenta" promptText = "Todas las cuentas" prefWidth="180"/>
+                    </HBox>
+
+                    <!-- Lista de transacciones -->
+                    <TableView fx:id="tablaMovimientos" style="-fx-background-color: #1E1E1E;">
+                        <columns>
+                            <TableColumn fx:id="colFecha" text="Fecha" prefWidth="120" />
+                            <TableColumn fx:id="colTipo" text="Tipo" prefWidth="100" />
+                            <TableColumn fx:id="colCuenta" text="Cuenta" prefWidth="150" />
+                            <TableColumn fx:id="colCategoria" text="Categoría" prefWidth="180" />
+                            <TableColumn fx:id="colDescripcion" text="Descripción" prefWidth="250" />
+                            <TableColumn fx:id="colMonto" text="Monto" prefWidth="120" />
+                            <TableColumn fx:id="colAcciones" text="Acciones" prefWidth="120" />
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+                        <Tab text="Calendario" fx:id="tabCalendario">
+                    <VBox spacing="20" alignment="CENTER" style="-fx-padding: 40;">
+                        <HBox alignment="CENTER" spacing="20">
+                            <Button text="◀" onAction="#onPrevMesResumen" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 18px; -fx-cursor: hand;"/>
+                            <VBox alignment="CENTER">
+                                <Label text="Calendario" style="-fx-text-fill: #8B949E; -fx-font-size: 14px;"/>
+                                <Label fx:id="lblMesCalendario" text="MES AÑO" style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold;"/>
+                            </VBox>
+                            <Button text="▶" onAction="#onNextMesResumen" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 18px; -fx-cursor: hand;"/>
+                        </HBox>
+                        <GridPane fx:id="calendarGrid" hgap="5" vgap="5" alignment="CENTER"/>
+                    </VBox>
+                </Tab>
+            <Tab text="Más" fx:id="tabMas">
+                    <VBox spacing="20" alignment="CENTER" style="-fx-padding: 40;">
+                        <Label text="Configuración" style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold;"/>
+                            <Button text="💵 Editar Precio del Dólar" onAction="#onEditarDolar" prefWidth="250" style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-size: 14px; -fx-cursor: hand; -fx-padding: 10;"/>
+
+                    <Button text="🏦 Gestionar Cuentas" onAction="#onGestionarCuentas" prefWidth="250" style="-fx-background-color: #FF9800; -fx-text-fill: white; -fx-font-size: 14px; -fx-cursor: hand; -fx-padding: 10;"/>
+
+                    <Button text="🏷 Editar Categorías" onAction="#onEditarCategorias" prefWidth="250" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px; -fx-cursor: hand; -fx-padding: 10;"/>
+
+                    <Button text="🔄 Gestionar Pagos Recurrentes" onAction="#onGestionarRecurrentes" prefWidth="250" style="-fx-background-color: #9C27B0; -fx-text-fill: white; -fx-font-size: 14px; -fx-cursor: hand; -fx-padding: 10;"/>
+
+                    <Separator maxWidth="300" style="-fx-background-color: #333;"/>
+
+                    <Button text="🗑 ELIMINAR TODOS LOS DATOS" onAction="#onEliminarDatos" prefWidth="250" style="-fx-background-color: #D32F2F; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-cursor: hand; -fx-padding: 10;"/>
+                    </VBox>
+                </Tab>
+        </TabPane>
+    </center>
+
+    <!-- Barra inferior de navegación -->
+    <bottom>
+        <HBox alignment="CENTER" spacing="60" style="-fx-background-color: #0A3D62; -fx-padding: 12 0 12 0; -fx-pref-height: 80; -fx-border-color: #1F6FEB; -fx-border-width: 1 0 0 0;">
+            <Button text="Saldos" onAction="#onTabSaldos" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;"/>
+            <Button text="Resumen" onAction="#onTabResumen" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;"/>
+            <Button text="Movimientos" onAction="#onTabMovimientos" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;"/>
+            <Button text="Calendario" onAction="#onTabCalendario" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;"/>
+            <Button text="Más" onAction="#onTabMas" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;"/>
+        </HBox>
+    </bottom>
+</BorderPane>

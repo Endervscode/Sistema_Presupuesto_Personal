@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="15" style="-fx-background-color: #121212; -fx-padding: 20;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.sistemapresupuestopersonal.AddTransactionController">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Añadir Transacción" style="-fx-text-fill: white; -fx-font-size: 22px; -fx-font-weight: bold;"/>
+
+    <!-- Fecha -->
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Fecha" style="-fx-text-fill: #AAAAAA;"/>
+        <DatePicker fx:id="dpFecha" />
+    </HBox>
+
+    <!-- Cuenta (chips con iconos) -->
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Cuenta" style="-fx-text-fill: #AAAAAA;"/>
+        <FlowPane fx:id="cuentasFlow" hgap="8" vgap="8"/>
+        <Button text="+" onAction="#onAddAccount" style="-fx-background-color: #333; -fx-text-fill: white; -fx-background-radius: 20;"/>
+    </HBox>
+
+    <!-- Tipo de transacción: solo Ingreso y Gasto -->
+    <Label text="Tipo de transacción" style="-fx-text-fill: #AAAAAA;"/>
+    <HBox spacing="15" alignment="CENTER_LEFT">
+        <Button fx:id="btnIngreso" text="Ingreso" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-pref-width: 120;" onAction="#onSelectIngreso"/>
+        <Button fx:id="btnGasto" text="Gasto" style="-fx-background-color: #F44336; -fx-text-fill: white; -fx-pref-width: 120;" onAction="#onSelectGasto"/>
+    </HBox>
+
+    <!-- Categoría (solo visible si es Gasto) -->
+    <HBox spacing="10" alignment="CENTER_LEFT" fx:id="categoriaBox" visible="false">
+        <Label text="Categoría" style="-fx-text-fill: #AAAAAA;"/>
+        <ChoiceBox fx:id="cbCategoria"/>
+        <Button text="+" onAction="#onAddCategoria" style="-fx-background-color: #333; -fx-text-fill: white; -fx-background-radius: 20;"/>
+    </HBox>
+
+    <!-- Importe -->
+    <Label text="Importe (Bs)" style="-fx-text-fill: #AAAAAA;"/>
+    <TextField fx:id="tfImporte" promptText="0.00" style="-fx-background-color: #222; -fx-text-fill: white;"/>
+
+    <!-- Comentarios -->
+    <Label text="Comentarios" style="-fx-text-fill: #AAAAAA;"/>
+    <TextArea fx:id="taComentarios" promptText="Nota opcional" style="-fx-background-color: #222; -fx-text-fill: black;"/>
+
+    <!-- Botones finales -->
+    <HBox spacing="20" alignment="CENTER_RIGHT">
+        <CheckBox text="Añadir más" fx:id="chkAddMore" selected="false" style="-fx-text-fill: #AAAAAA;"/>
+        <Button text="Cancelar" onAction="#onCancelar" style="-fx-background-color: #444; -fx-text-fill: white;"/>
+        <Button text="Guardar" onAction="#onGuardar" style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
+    </HBox>
+
+    <Label fx:id="lblError" text="" style="-fx-text-fill: red; -fx-font-size: 14px;"/>
+</VBox>

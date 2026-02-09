@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.layout.HBox?>
+<VBox spacing="15" style="-fx-background-color: #121212; -fx-padding: 20;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sistemapresupuestopersonal.AddAccountController">
+    <Label text="Añadir Cuenta" style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+    <Label text="Nombre de la cuenta" style="-fx-text-fill: #AAAAAA;"/>
+    <TextField fx:id="tfNombre" promptText="Ej. Cuenta Bancaria Venezuela"/>
+
+    <Label text="Tipo de cuenta" style="-fx-text-fill: #AAAAAA;"/>
+    <ChoiceBox fx:id="cbTipo"/>
+
+    <Label text="Saldo inicial (Bs)" style="-fx-text-fill: #AAAAAA;"/>
+    <TextField fx:id="tfSaldoInicial" promptText="0.00"/>
+
+    <Label fx:id="lblError" style="-fx-text-fill: red; -fx-font-size: 14px;"/>
+
+    <HBox spacing="20" alignment="CENTER_RIGHT">
+        <Button text="Cancelar" onAction="#onCancelar" style="-fx-background-color: #444444; -fx-text-fill: white;"/>
+        <Button text="Guardar" onAction="#onGuardar" style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
+    </HBox>
+</VBox>

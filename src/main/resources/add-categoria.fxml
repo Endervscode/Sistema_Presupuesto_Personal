@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="15" style="-fx-background-color: #121212; -fx-padding: 20;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.sistemapresupuestopersonal.AddCategoriaController">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Añadir Categoría" style="-fx-text-fill: white; -fx-font-size: 22px; -fx-font-weight: bold;"/>
+
+    <!-- Nombre de la categoría -->
+    <Label text="Nombre de la categoría" style="-fx-text-fill: #AAAAAA;"/>
+    <TextField fx:id="tfNombre" promptText="Ej. Comida, Transporte, Entretenimiento" />
+
+    <!-- Límite de presupuesto (opcional) -->
+    <Label text="Límite mensual (Bs)" style="-fx-text-fill: #AAAAAA;"/>
+    <TextField fx:id="tfLimite" promptText="0.00 (opcional)" />
+
+    <!-- Descripción -->
+    <Label text="Descripción (opcional)" style="-fx-text-fill: #AAAAAA;"/>
+    <TextArea fx:id="taDescripcion" promptText="Notas o detalles sobre la categoría" wrapText="true" prefHeight="100" style="-fx-background-color: #222; -fx-text-fill: black;"/>
+
+    <!-- Mensaje de error -->
+    <Label fx:id="lblError" text="" style="-fx-text-fill: red; -fx-font-size: 14px;"/>
+
+    <!-- Botones finales -->
+    <HBox spacing="20" alignment="CENTER_RIGHT">
+        <Button text="Cancelar" onAction="#onCancelar" style="-fx-background-color: #444; -fx-text-fill: white;"/>
+        <Button text="Guardar" onAction="#onGuardar" style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
+    </HBox>
+
+</VBox>
