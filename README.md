@@ -66,13 +66,13 @@ Los datos se guardan automáticamente en la raíz del proyecto en los siguientes
 1. **Clonar el repositorio o Descargar este Repositorio**
 
 2. **Abrir en el IDE:**
-    ```Importar el proyecto como proyecto Maven/Gradle.
+    Importar el proyecto como proyecto Maven/Gradle.
 
 3. **Configurar JavaFX:**
-    ```Asegúrate de que las librerías de JavaFX estén configuradas en el module-path si no usas un gestor de dependencias que lo haga automáticamente.
+    Asegúrate de que las librerías de JavaFX estén configuradas en el module-path si no usas un gestor de dependencias que lo haga automáticamente.
 
 4. **Ejecutar:**
-    ```Busca la clase principal (PresupuestoApplication) y ejecútala.
+    Busca la clase principal (PresupuestoApplication) y ejecútala.
 
 ## 📸 Capturas de Pantalla
 ![Pestaña Login](image-7.png)
