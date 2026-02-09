@@ -1,4 +1,4 @@
-# Sistema de Gestión de Presupuesto Personal 💰
+# Sistema de Gestión de Presupuesto Personal 
 
 Una aplicación de escritorio robusta y moderna construida con **Java** y **JavaFX** para la gestión integral de finanzas personales. Permite a los usuarios rastrear ingresos, gastos, cuentas bancarias y presupuestos mensuales con una interfaz gráfica intuitiva.
 
@@ -76,11 +76,11 @@ Los datos se guardan automáticamente en la raíz del proyecto en los siguientes
 
 ## 📸 Capturas de Pantalla
 ![Pestaña Login](image-7.png)
-[Pestaña Saldos](image.png)
-[Pestaña Resumen](image-2.png)
-[Pestaña Movimientos](image-3.png)
-[Pestaña Calendario](image-4.png)
-[Pestaña Más](image-5.png)
+![Pestaña Saldos](image.png)
+![Pestaña Resumen](image-2.png)
+![Pestaña Movimientos](image-3.png)
+![Pestaña Calendario](image-4.png)
+![Pestaña Más](image-5.png)
 
 ## 📄 Licencia
 
